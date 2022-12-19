@@ -1,4 +1,4 @@
-package Lista;
+package Lista.Q1;
 // Encapsulamento de dados e operações tipicas de funcionários
 public class Funcionario {
     private String nome;
@@ -42,7 +42,7 @@ public class Funcionario {
     }
     @Override
     public String toString(){
-        return "Funcionario:" +nome+ " " +sobrenome;
+        return "Funcionario: " +nome+ " " +sobrenome;
     }
     // retorno de salário líquido
     public double getSalarioLiquido() {
