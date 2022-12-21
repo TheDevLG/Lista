@@ -26,12 +26,14 @@ public class FuncionarioUtil {
 
             do {
                 Iterator<Funcionario> It = funcionarios.iterator();
+
                 System.out.println("**************************************************************************");
                 System.out.println("* 1- Cadastrar novo funcionário.                                         *");
                 System.out.println("* 2- Acrescentar horas trabalhadas a funcionário.                        *");
                 System.out.println("* 3- Exibir salário líquido (até o momento) dos funcionários cadastrados.*");
                 System.out.println("* 4- Exibir o salário liquido médio de todos os funcionários cadastrados.*");
-                System.out.println("* 5- Encerrar programa.                                                  *");
+                System.out.println("* 5- Remover um funcionário.                                             *");
+                System.out.println("* 6- Encerrar programa.                                                  *");
                 System.out.println("**************************************************************************");
 
                 do {
@@ -83,7 +85,9 @@ public class FuncionarioUtil {
                         break;
 
                     case 2:
-
+                        if (funcionarios.isEmpty()){
+                                System.out.println("Por favor, primeiramente cadastre um funcionário");
+                            } else{
                         System.out.println("Insira o primeiro nome do funcionario desejado:");
                         input.nextLine();
                         String nomePesquisa = input.nextLine().trim().toUpperCase();
@@ -92,6 +96,7 @@ public class FuncionarioUtil {
 
                         while (It.hasNext()) {
                             func = It.next();
+                           
                             String nomeComparation = func.getNome().trim().toUpperCase();
                             String sobrenomeComparation = func.getSobrenome().trim().toUpperCase();
 
@@ -115,21 +120,35 @@ public class FuncionarioUtil {
                                 System.out.println("carga horária adicionada ao " + func);
                                 System.out.println(func + " tem " + func.getHorasTrabalhadas() + " horas trabalhadas");
                             } else if (!nomePesquisa.equals(nomeComparation)
-                                    && !sobrenomePesquisa.equals(sobrenomeComparation)) {
+                                    || !sobrenomePesquisa.equals(sobrenomeComparation)) {
                                 System.out.println("não há funcionários com este nome e sobrenome");
-                            }
-                        }
+                                } //else if
+                            } //while
+                        } //else
 
                         break;
                     case 3:
+                    if (funcionarios.isEmpty()){
+                        System.out.println("Por favor, primeiramente cadastre um funcionário");
+                    }
+                    else{
                         while (It.hasNext()) {
                             func = It.next();
                             double salarioLiquido = func.getSalarioLiquido();
+                            if(salarioLiquido == 0){
+                            System.out.println(func + "\n(sem registro de horas trabalhadas!)");
+                            
+                            }else{
                             System.out.println(func + "\nsalário líquido: " + salarioLiquido + " reais\n");
+                            }
                         }
+                    }
 
                         break;
                     case 4:
+                    if (funcionarios.isEmpty()){
+                        System.out.println("Por favor, primeiramente cadastre um funcionário");
+                    } else{
                         while (It.hasNext()) {
                             func = It.next();
                             salarioTotal += func.getSalarioLiquido();
@@ -137,14 +156,45 @@ public class FuncionarioUtil {
                         }
                         salarioMedioTotal = (salarioTotal / contador);
                         System.out.println("O salário médio de todos funcionários é: " + salarioMedioTotal + " reais");
-
+                    }
                     case 5:
+                     if (funcionarios.isEmpty()){
+                        System.out.println("Por favor, primeiramente cadastre um funcionário");
+                        } else{
+                            System.out.println("Insira o primeiro nome do funcionario desejado:");
+                            input.nextLine();
+                            String nomeRemover = input.nextLine().trim().toUpperCase();
+                            System.out.println("digite o sobrenome do funcionario desejado");
+                            String sobrenomeRemover = input.nextLine().trim().toUpperCase();
+
+                            while (It.hasNext()){
+                                func = It.next();
+
+                                String nomeComparar = func.getNome().trim().toUpperCase();
+                                String sobrenomeComparar = func.getSobrenome().trim().toUpperCase();
+
+                                if(nomeRemover.equals(nomeComparar) && sobrenomeRemover.equals(sobrenomeComparar)){
+                                    funcionarios.remove(func);
+                                    System.out.println("funcionário removido com sucesso!");
+
+
+                                } else if (!nomeRemover.equals(nomeComparar) || !sobrenomeRemover.equals(sobrenomeComparar)){
+                                    System.out.println("não há funcionários com esse nome e sobrenome!");
+                                }
+
+
+                            } //while
+
+
+
+                        }//else
+                    case 6:
                         break;
 
                     default:
-                        System.out.println("Opção inválida, digite um número entre 1 e 5!");
+                        System.out.println("Opção inválida, digite um número entre 1 e 6!");
                 } // switch
-            } while (opcao != 5);
+            } while (opcao != 6);
 
             input.close();
         } // try
