@@ -5,14 +5,14 @@ public class Exemplar {
     private String titulo; // título
     private String autores; // nomes de autores de título
     private boolean aptoEmprestimo; // exemplar habilitado para empréstimos se valor for true
-    private int emprestimos; // quantidade, até então, de empréstimos
+    //private int emprestimos; // quantidade, até então, de empréstimos
 
     public Exemplar(int tombo, String titulo, String autores, boolean aptoEmprestimo) {
         this.tombo = tombo;
         this.titulo = titulo;
         this.autores = autores;
         this.aptoEmprestimo = aptoEmprestimo;
-        this.emprestimos = 0;
+       // this.emprestimos = 0;
     }
 
     public int getTombo() {
@@ -63,7 +63,7 @@ public class Exemplar {
      */
     public boolean adicionarEmprestimo() {
         if (aptoEmprestimo) { // caso empréstimos habilitados
-            emprestimos++; // atualização de empréstimos de exemplar
+           // emprestimos++; // atualização de empréstimos de exemplar
             return true; // retorno de indicativo de processamento de empréstimo
         } else {
             return false; // retorno de indicativo de não processamento de empréstimo
