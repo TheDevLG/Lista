@@ -82,6 +82,7 @@ public class FuncionarioUtil {
                         System.out.println(func);
 
                         System.out.println("*Funcionário cadastrado*");
+                        opcao = 0;
                         break;
 
                     case 2:
@@ -117,14 +118,18 @@ public class FuncionarioUtil {
                                     }
                                 } while (radar);
                                 func.adicionarCargaHoraria(cargaHoraria);
+                                contador++;
                                 System.out.println("carga horária adicionada ao " + func);
                                 System.out.println(func + " tem " + func.getHorasTrabalhadas() + " horas trabalhadas");
-                            } else if (!nomePesquisa.equals(nomeComparation)
-                                    || !sobrenomePesquisa.equals(sobrenomeComparation)) {
-                                System.out.println("não há funcionários com este nome e sobrenome");
+                            } 
                                 } //else if
                             } //while
+                            if (contador == 0) {
+                                System.out.println("não há funcionários com esta combinação de nome e sobrenome!");
+                            
                         } //else
+                        contador = 0;
+                        opcao = 0;
 
                         break;
                     case 3:
@@ -138,12 +143,12 @@ public class FuncionarioUtil {
                             if(salarioLiquido == 0){
                             System.out.println(func + "\n(sem registro de horas trabalhadas!)");
                             
-                            }else{
-                            System.out.println(func + "\nsalário líquido: " + salarioLiquido + " reais\n");
+                            }else if (salarioLiquido != 0){
+                            System.out.println(func + "\nsalário líquido: " + salarioLiquido + " reais");
                             }
                         }
                     }
-
+                        opcao = 0;
                         break;
                     case 4:
                     if (funcionarios.isEmpty()){
@@ -155,8 +160,18 @@ public class FuncionarioUtil {
                             contador++;
                         }
                         salarioMedioTotal = (salarioTotal / contador);
+                        if(salarioMedioTotal != 0){
                         System.out.println("O salário médio de todos funcionários é: " + salarioMedioTotal + " reais");
+                       
+                        } else {
+                            System.out.println("sem registro de horas trabalhadas!");
+                        }
                     }
+                    salarioTotal = 0;
+                    contador= 0;
+                    opcao = 0;
+                    break;
+
                     case 5:
                      if (funcionarios.isEmpty()){
                         System.out.println("Por favor, primeiramente cadastre um funcionário");
@@ -175,19 +190,23 @@ public class FuncionarioUtil {
 
                                 if(nomeRemover.equals(nomeComparar) && sobrenomeRemover.equals(sobrenomeComparar)){
                                     funcionarios.remove(func);
+                                    contador ++;
                                     System.out.println("funcionário removido com sucesso!");
 
 
-                                } else if (!nomeRemover.equals(nomeComparar) || !sobrenomeRemover.equals(sobrenomeComparar)){
-                                    System.out.println("não há funcionários com esse nome e sobrenome!");
-                                }
+                                }  
 
 
                             } //while
+                            
+                            if (contador == 0){
+                                    System.out.println("não há funcionários com esta combinação de nome e sobrenome!");
+                                }
 
-
-
+                            contador = 0;
                         }//else
+                        opcao = 0;
+                        break;
                     case 6:
                         break;
 
